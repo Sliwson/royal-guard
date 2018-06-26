@@ -6,8 +6,8 @@ public class ProjectileManager : MonoBehaviour {
     [System.Serializable]
     private class ProjectileSpawner
     {
-        public Transform location;
-        public Vector2 velocity;
+        public Transform location = null;
+        public Vector2 velocity = Vector2.zero;
     }
 
     [SerializeField]

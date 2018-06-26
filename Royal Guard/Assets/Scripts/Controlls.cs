@@ -22,12 +22,40 @@ public class Controlls : MonoBehaviour {
         Left, 
         Right
     }
+    
+    private class ActiveDirections
+    {
+        public bool left = false;
+        public bool right = false;
+    }
+
+    private ActiveDirections activeDirections = new ActiveDirections();
 
     [SerializeField]
     private Range range;
 
     [SerializeField]
     private Transform shieldSphere; 
+
+    public void RotateLeftStart()
+    {
+        activeDirections.left = true;
+    }
+
+    public void RotateLeftStop()
+    {
+        activeDirections.left = false;
+    }
+
+    public void RotateRightStart()
+    {
+        activeDirections.right = true;
+    }
+
+    public void RotateRightStop()
+    {
+        activeDirections.right = false;
+    } 
 
     void Start ()
     {
@@ -39,22 +67,37 @@ public class Controlls : MonoBehaviour {
 	
 	void Update ()
     {
-		if(arrowControlls)
+        if (arrowControlls)
         {
-            float rotation = 0f;
+            HandleArrowControlls();    
+        }
+        else
+        {
+            HandleTouchControlls();
+        }
+    }
 
-            if (Input.GetKey("left"))
-            {
-                rotation += CalculateRotation(Direction.Left);
-            }
+    private void HandleArrowControlls()
+    {
+        if (Input.GetKey("left"))
+        {
+            RotateShield(Direction.Left);
+        }
+        if (Input.GetKey("right"))
+        {
+            RotateShield(Direction.Right);
+        }
+    }
 
-            if (Input.GetKey("right"))
-            {
-                rotation -= CalculateRotation(Direction.Right);
-            }
-
-            shieldSphere.Rotate(0, 0, rotation);
-
+    private void HandleTouchControlls()
+    {
+        if(activeDirections.left)
+        {
+            RotateShield(Direction.Left);
+        }
+        if(activeDirections.right)
+        {
+            RotateShield(Direction.Right);
         }
     }
 
@@ -73,5 +116,22 @@ public class Controlls : MonoBehaviour {
             return diff;
         else
             return 0f;
+    }
+
+    private void RotateShield(Direction d)
+    {
+        float rotation = 0f;
+
+        switch (d)
+        {
+            case Direction.Left:
+                rotation += CalculateRotation(d);
+                break;
+            case Direction.Right:
+                rotation -= CalculateRotation(d);
+                break;
+        }
+
+        shieldSphere.Rotate(0, 0, rotation);
     }
 }
