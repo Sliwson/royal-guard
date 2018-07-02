@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour {
 
     [SerializeField]
     private float zDestroy = 0f;
+    [SerializeField]
+    private int damage = 1;
 
     public void Push(Vector2 velocity)
     {
@@ -13,9 +15,26 @@ public class Projectile : MonoBehaviour {
 
         rigidbody2D.velocity = velocity;
     }
-	
-	void Update () {
+
+    public void DisableCollider()
+    {
+        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
+
+        circleCollider2D.isTrigger = true;
+    }
+
+    public void DestroyProjectile()
+    {
+        Destroy(gameObject);
+    }
+
+    public int GetProjectileDamage()
+    {
+        return damage;
+    }
+
+    void Update () {
         if (transform.position.y < zDestroy)
-            Destroy(gameObject);
+            DestroyProjectile();
 	}
 }
