@@ -9,14 +9,7 @@ public class Controlls : MonoBehaviour {
 
     [SerializeField]
     private float shieldSpeed = 10f;
-
-    [System.Serializable]
-    private class Range
-    {
-        public float min = -70f;
-        public float max = 90f;
-    };
-
+        
     private enum Direction
     {
         Left, 
@@ -31,12 +24,14 @@ public class Controlls : MonoBehaviour {
 
     private ActiveDirections activeDirections = new ActiveDirections();
 
+    private MovementInterpolation movementInterpolation;
+    
     [SerializeField]
     private Range range;
 
     [SerializeField]
     private Transform shieldSphere; 
-
+        
     public void RotateLeftStart()
     {
         activeDirections.left = true;
@@ -63,6 +58,8 @@ public class Controlls : MonoBehaviour {
             Debug.LogError("Shield sphere is not set in Controlls Script!");
 
         shieldSphere.rotation = Quaternion.identity;
+
+        movementInterpolation = new MovementInterpolation(range);
     }
 	
 	void Update ()
@@ -101,12 +98,19 @@ public class Controlls : MonoBehaviour {
         }
     }
 
-    private float CalculateRotation(Direction d)
+    private float GetCurrentAngle()
     {
         float angle = -shieldSphere.transform.localEulerAngles.z;
 
         if (angle < -180)
             angle += 360; //as angle returns range (-360, 0]
+
+        return angle;
+    }
+
+    private float CalculateRotation(Direction d)
+    {
+        float angle = GetCurrentAngle();
 
         float diff = shieldSpeed * Time.deltaTime;
 
@@ -116,19 +120,20 @@ public class Controlls : MonoBehaviour {
             return diff;
         else
             return 0f;
-    }
+    }    
 
     private void RotateShield(Direction d)
     {
         float rotation = 0f;
+        float diff = movementInterpolation.InterpolateRotation(CalculateRotation(d), GetCurrentAngle());
 
         switch (d)
         {
             case Direction.Left:
-                rotation += CalculateRotation(d);
+                rotation += diff;
                 break;
             case Direction.Right:
-                rotation -= CalculateRotation(d);
+                rotation -= diff;
                 break;
         }
 
