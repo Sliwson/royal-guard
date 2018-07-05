@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowControlls: 1
-  shieldSpeed: 200
+  shieldSpeed: 400
   range:
     min: -90
     max: 90
