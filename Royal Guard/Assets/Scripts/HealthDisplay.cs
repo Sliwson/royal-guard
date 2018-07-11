@@ -7,7 +7,7 @@ public class HealthDisplay : MonoBehaviour
 {
     private Text text;
 
-    private void Start()
+    private void Awake()
     {
         text = GetComponent<Text>();
     }
