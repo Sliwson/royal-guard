@@ -25,7 +25,7 @@ public class Controlls : MonoBehaviour {
     private ActiveDirections activeDirections = new ActiveDirections();
 
     private MovementInterpolation movementInterpolation;
-    
+        
     [SerializeField]
     private Range range;
 
@@ -50,7 +50,17 @@ public class Controlls : MonoBehaviour {
     public void RotateRightStop()
     {
         activeDirections.right = false;
-    } 
+    }
+
+    public float GetCurrentAngle()
+    {
+        float angle = -shieldSphere.transform.localEulerAngles.z;
+
+        if (angle < -180)
+            angle += 360; //as angle returns range (-360, 0]
+
+        return angle;
+    }
 
     void Start ()
     {
@@ -96,16 +106,6 @@ public class Controlls : MonoBehaviour {
         {
             RotateShield(Direction.Right);
         }
-    }
-
-    private float GetCurrentAngle()
-    {
-        float angle = -shieldSphere.transform.localEulerAngles.z;
-
-        if (angle < -180)
-            angle += 360; //as angle returns range (-360, 0]
-
-        return angle;
     }
 
     private float CalculateRotation(Direction d)
