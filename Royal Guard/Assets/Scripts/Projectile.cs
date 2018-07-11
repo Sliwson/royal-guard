@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour {
     {
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
 
-        circleCollider2D.isTrigger = true;
+        //circleCollider2D.isTrigger = true; //not sure if good change
     }
 
     public void DestroyProjectile()
