@@ -9,12 +9,6 @@ public class Controlls : MonoBehaviour {
 
     [SerializeField]
     private float shieldSpeed = 10f;
-        
-    private enum Direction
-    {
-        Left, 
-        Right
-    }
     
     private class ActiveDirections
     {
