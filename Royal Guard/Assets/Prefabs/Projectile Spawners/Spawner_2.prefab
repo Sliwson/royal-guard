@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   location: {fileID: 4546014224781874, guid: e3fffe9f0dc29d349aca3d3f2c514226, type: 2}
-  velocity: {x: 150, y: 30}
+  velocity: {x: 250, y: 60}
   projectilePrefab: {fileID: 1134152998131908, guid: 18a255fa78a4a9d4a86742f9e746b37c,
     type: 2}
