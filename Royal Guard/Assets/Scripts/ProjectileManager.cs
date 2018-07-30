@@ -3,37 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileManager : MonoBehaviour {
-    [System.Serializable]
-    private class ProjectileSpawner
-    {
-        public Transform location = null;
-        public Vector2 velocity = Vector2.zero;
-        public GameObject projectilePrefab;
-    }
-        
     [SerializeField]
-    private ProjectileSpawner[] projectileSpawners;
-    
-    [ContextMenu("Spawn random projectile")]
-    public void SpawnRandomProjectile()
-    {
-        int index = Random.Range(0, projectileSpawners.Length);
+    private Transform projectilePartent;
 
-        SpawnProjectile(projectileSpawners[index]);
+    [SerializeField]
+    private ProjectileSequence projectileSequence;
+
+    private SequenceManager sequenceManager;
+
+    private void Start()
+    {
+        sequenceManager = GetComponent<SequenceManager>();
     }
 
-    [ContextMenu("Spawn 10 random projectiles")]
-    public void SpawnRandomProjectiles()
+    [ContextMenu("Start sequence")]
+    public void StartSequence()
     {
-        float timeOffset = 1f;
-        int count = 10;
-
-        for (int i = 0; i < count; i++)
-            Invoke("SpawnRandomProjectile", timeOffset * i);
+        sequenceManager.StartSequence(projectileSequence ,this);
     }
-    private void SpawnProjectile(ProjectileSpawner spawner)
+
+    public void SpawnProjectile(ProjectileSpawner spawner)
     {
-        GameObject prefab = Instantiate(spawner.projectilePrefab, spawner.location) as GameObject;
+        GameObject prefab = Instantiate(spawner.projectilePrefab, spawner.location.position, Quaternion.identity, projectilePartent) as GameObject;
 
         Projectile projectileScript = prefab.GetComponent<Projectile>();
 
