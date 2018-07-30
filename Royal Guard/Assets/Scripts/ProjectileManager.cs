@@ -8,11 +8,9 @@ public class ProjectileManager : MonoBehaviour {
     {
         public Transform location = null;
         public Vector2 velocity = Vector2.zero;
+        public GameObject projectilePrefab;
     }
-
-    [SerializeField]
-    private GameObject projectilePrefab;
-
+        
     [SerializeField]
     private ProjectileSpawner[] projectileSpawners;
     
@@ -35,7 +33,7 @@ public class ProjectileManager : MonoBehaviour {
     }
     private void SpawnProjectile(ProjectileSpawner spawner)
     {
-        GameObject prefab = Instantiate(projectilePrefab, spawner.location) as GameObject;
+        GameObject prefab = Instantiate(spawner.projectilePrefab, spawner.location) as GameObject;
 
         Projectile projectileScript = prefab.GetComponent<Projectile>();
 
