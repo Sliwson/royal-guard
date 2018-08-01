@@ -9,6 +9,7 @@ public class Coordinates : MonoBehaviour {
     private void Start()
     {
         InitializeDictionary();
+        CalculateCorners();
     }
 
     public Vector2 GetCameraCorner(Corner corner)
@@ -21,12 +22,10 @@ public class Coordinates : MonoBehaviour {
 
     private void InitializeDictionary()
     {
-        Camera camera = Camera.main;
-
-        corners.Add(Corner.LeftBottom, camera.ViewportToWorldPoint(new Vector3(0, 0, camera.nearClipPlane)));
-        corners.Add(Corner.LeftTop, camera.ViewportToWorldPoint(new Vector3(0, 1, camera.nearClipPlane)));
-        corners.Add(Corner.RightBottom, camera.ViewportToWorldPoint(new Vector3(1, 0, camera.nearClipPlane)));
-        corners.Add(Corner.RightTop, camera.ViewportToWorldPoint(new Vector3(1, 1, camera.nearClipPlane)));
+        corners.Add(Corner.LeftBottom, Vector3.zero);
+        corners.Add(Corner.LeftTop, Vector3.zero);
+        corners.Add(Corner.RightBottom, Vector3.zero);
+        corners.Add(Corner.RightTop, Vector3.zero);
     }
 
     private void CalculateCorners()
