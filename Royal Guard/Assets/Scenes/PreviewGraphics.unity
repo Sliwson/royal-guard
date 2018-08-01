@@ -327,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 220875860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 45, y: 45, z: 45}
   m_Children:
   - {fileID: 828277743}
   m_Father: {fileID: 1332754123}
@@ -785,7 +785,7 @@ Transform:
   m_GameObject: {fileID: 828277742}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children: []
   m_Father: {fileID: 220875861}
   m_RootOrder: 0
@@ -938,8 +938,8 @@ MonoBehaviour:
   arrowControlls: 1
   shieldSpeed: 400
   range:
-    min: -95
-    max: 95
+    min: -110
+    max: 110
   shieldSphere: {fileID: 220875861}
 --- !u!114 &1050248611
 MonoBehaviour:

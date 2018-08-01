@@ -22,7 +22,7 @@ public class MovementInterpolation
 
     private float CalculateInterpolationValue(float angleScaled)
     {
-        return 0.5f + 0.5f * angleScaled; //function to tweak with
+        return 0.6f + 0.4f * angleScaled; //function to tweak with
     }
 
     private float ScaleAngle(float currentAngle)

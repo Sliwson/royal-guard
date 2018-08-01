@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4625849249328154}
   - component: {fileID: 212076458273770302}
-  - component: {fileID: 114598410901797604}
   - component: {fileID: 50167694246479104}
   - component: {fileID: 61494331734197452}
+  - component: {fileID: 114598410901797604}
   - component: {fileID: 114865309986999712}
   m_Layer: 0
   m_Name: Projectile
