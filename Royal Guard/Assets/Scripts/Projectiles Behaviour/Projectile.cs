@@ -14,14 +14,7 @@ public class Projectile : MonoBehaviour {
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
 
         rigidbody2D.velocity = velocity;
-    }
-
-    public void DisableCollider()
-    {
-        CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
-
-        //circleCollider2D.isTrigger = true; //not sure if good change
-    }
+    }       
 
     public void DestroyProjectile()
     {

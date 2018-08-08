@@ -10,7 +10,7 @@ public class ColliderController : MonoBehaviour
         {
             Projectile projectile = collider.gameObject.GetComponent<Projectile>();
 
-            projectile.DisableCollider();
+            //currently nothing
         }
     }
 }
