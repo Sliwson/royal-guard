@@ -5,10 +5,12 @@ using UnityEngine;
 public class DamageController : MonoBehaviour
 {
     private Health health;
+    private AnimationController animationController;
 
     private void Start()
     {
         health = GetComponent<Health>();
+        animationController = GetComponent<AnimationController>();
     }
 
     private void DealDamage(int damage)
@@ -24,7 +26,9 @@ public class DamageController : MonoBehaviour
 
             DealDamage(projectile.GetProjectileDamage());
 
-            projectile.DestroyProjectile();
+            animationController.TriggerAnimation(CharacterAnimations.Hit);
+
+            //projectile.DestroyProjectile();
         }
     }
 }

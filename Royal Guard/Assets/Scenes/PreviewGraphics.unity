@@ -952,6 +952,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b67392d01d81b96468748302d487661c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileManager: {fileID: 183799098}
+  sequenceManager: {fileID: 183799100}
+  loop: 0
 --- !u!4 &1050248612
 Transform:
   m_ObjectHideFlags: 0
@@ -1017,6 +1020,8 @@ GameObject:
   - component: {fileID: 1332754125}
   - component: {fileID: 1332754124}
   - component: {fileID: 1332754127}
+  - component: {fileID: 1332754129}
+  - component: {fileID: 1332754128}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Player
@@ -1101,6 +1106,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlls: {fileID: 1050248610}
   characterSprites: {fileID: 1100372844}
+--- !u!95 &1332754128
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332754122}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c0cf58740fd14d499ed8909649aba04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1332754129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332754122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c259edbeb382647b2518a895120828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504104544
 GameObject:
   m_ObjectHideFlags: 0
