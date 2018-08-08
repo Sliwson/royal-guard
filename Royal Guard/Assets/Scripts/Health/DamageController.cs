@@ -28,7 +28,9 @@ public class DamageController : MonoBehaviour
 
             animationController.TriggerAnimation(CharacterAnimations.Hit);
 
-            //projectile.DestroyProjectile();
+            projectile.Push(new Vector2(10f,0f));
+
+            projectile.DisableCollider();
         }
     }
 }
