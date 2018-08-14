@@ -9,6 +9,9 @@ public class CharacterFlipper : MonoBehaviour {
     [SerializeField]
     private Transform characterSprites;
 
+    [SerializeField]
+    private Transform shieldSprite;
+
     private Direction characterDirection;
     private Direction shieldDirection;
     
@@ -22,7 +25,10 @@ public class CharacterFlipper : MonoBehaviour {
         UpdateShieldDirection();
 
         if (characterDirection != shieldDirection)
+        {
             FlipCharacter();
+            FlipShield();
+        }
 	}
 
     private void UpdateShieldDirection()
@@ -42,6 +48,13 @@ public class CharacterFlipper : MonoBehaviour {
         characterSprites.localScale = newScale;
 
         characterDirection = Invert(characterDirection);
+    }
+
+    private void FlipShield()
+    {
+        Vector3 newScale = shieldSprite.localScale;
+        newScale.y *= -1;
+        shieldSprite.localScale = newScale;
     }
 
     private Direction Invert(Direction d)

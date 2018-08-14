@@ -1090,6 +1090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlls: {fileID: 1050248610}
   characterSprites: {fileID: 1100372844}
+  shieldSprite: {fileID: 828277743}
 --- !u!95 &1332754128
 Animator:
   serializedVersion: 3
