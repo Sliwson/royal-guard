@@ -80,13 +80,21 @@ public class Controlls : MonoBehaviour {
 
     private void HandleArrowControlls()
     {
-        if (Input.GetKey("left"))
+        if (Input.GetKeyDown("left"))
         {
-            RotateShield(Direction.Left);
+            RotateLeftStart();
         }
-        if (Input.GetKey("right"))
+        else if (Input.GetKeyUp("left"))
         {
-            RotateShield(Direction.Right);
+            RotateLeftStop();
+        }
+        if (Input.GetKeyDown("right"))
+        {
+            RotateRightStart();
+        }
+        else if (Input.GetKeyUp("right"))
+        {
+            RotateRightStop();
         }
     }
 
