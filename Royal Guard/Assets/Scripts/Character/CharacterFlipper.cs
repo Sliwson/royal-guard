@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class CharacterFlipper : MonoBehaviour {
     [SerializeField]
-    private Controlls controlls; //for getting current angle
-
-    [SerializeField]
     private Transform characterSprites;
 
     [SerializeField]
     private Transform shieldSprite;
 
+    private Controlls controlls; //for getting current angle
+
     private Direction characterDirection;
     private Direction shieldDirection;
     
     void Start () {
+        controlls = GameObject.FindGameObjectWithTag("GameController").GetComponent<Controlls>();
+
         characterDirection = Direction.Right;
 
         UpdateShieldDirection();
