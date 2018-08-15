@@ -79,6 +79,7 @@ public class Controlls : MonoBehaviour {
         }
 
         HandleControlls();
+        CalculateRotatingTime();
     }
 
     private void HandleArrowControlls()
@@ -111,6 +112,18 @@ public class Controlls : MonoBehaviour {
         {
             RotateShield(Direction.Right);
         }
+    }
+
+    private void CalculateRotatingTime()
+    {
+        float currentAngle = GetCurrentAngle();
+
+        if (previousAngle != currentAngle)
+            currentRotationTime += Time.deltaTime;
+        else
+            currentRotationTime = 0f;
+
+        previousAngle = currentAngle;
     }
 
     private float CalculateRotation(Direction d)
