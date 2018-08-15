@@ -59,6 +59,16 @@ public class Controlls : MonoBehaviour {
         return angle;
     }
 
+    public Range GetRange()
+    {
+        return range;
+    }
+
+    public float GetCurrentRotationTime()
+    {
+        return currentRotationTime;
+    }
+
     void Start ()
     {
         if (shieldSphere == null)

@@ -155,6 +155,36 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b42133ba71725c41bfe28951701ed4c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &45721129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 45721130}
+  m_Layer: 0
+  m_Name: Particle Transforms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &45721130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 45721129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -15, z: -50}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 511578648}
+  - {fileID: 1221962191}
+  m_Father: {fileID: 1332754123}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175021049
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +499,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &511578647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 511578648}
+  m_Layer: 0
+  m_Name: Left Particle Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511578648
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511578647}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 45721130}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &610459480
 Prefab:
   m_ObjectHideFlags: 0
@@ -987,6 +1045,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4357686445358140, guid: cabc0fa572e0883479aa94752800f12a,
     type: 2}
   m_PrefabInternal: {fileID: 1534750932}
+--- !u!1 &1221962190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1221962191}
+  m_Layer: 0
+  m_Name: Right Particle Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1221962191
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221962190}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 45721130}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1306134429 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4546014224781874, guid: e3fffe9f0dc29d349aca3d3f2c514226,
@@ -1005,6 +1091,7 @@ GameObject:
   - component: {fileID: 1332754124}
   - component: {fileID: 1332754127}
   - component: {fileID: 1332754129}
+  - component: {fileID: 1332754130}
   - component: {fileID: 1332754128}
   m_Layer: 0
   m_Name: Knight
@@ -1025,6 +1112,7 @@ Transform:
   m_Children:
   - {fileID: 220875861}
   - {fileID: 1100372844}
+  - {fileID: 45721130}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1088,7 +1176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fa75db95662c64cad684cbe0e049ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlls: {fileID: 1050248610}
   characterSprites: {fileID: 1100372844}
   shieldSprite: {fileID: 828277743}
 --- !u!95 &1332754128
@@ -1120,6 +1207,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c259edbeb382647b2518a895120828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1332754130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1332754122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2c989370e90ee4f99f41fd0558bf10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftParticleTransform: {fileID: 511578648}
+  rightParticleTransform: {fileID: 1221962191}
+  resetRange:
+    min: -100
+    max: 100
+  angleOffset: 10
+  particlePrefab: {fileID: 1477325996683334, guid: 7d5c556286e24664fa7f87675e763587,
+    type: 2}
 --- !u!1 &1504104544
 GameObject:
   m_ObjectHideFlags: 0
