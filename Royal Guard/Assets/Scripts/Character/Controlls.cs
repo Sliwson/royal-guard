@@ -19,7 +19,10 @@ public class Controlls : MonoBehaviour {
     private ActiveDirections activeDirections = new ActiveDirections();
 
     private MovementInterpolation movementInterpolation;
-        
+
+    private float currentRotationTime = 0f;
+    private float previousAngle = 0f;
+
     [SerializeField]
     private Range range;
 
@@ -64,6 +67,8 @@ public class Controlls : MonoBehaviour {
         shieldSphere.rotation = Quaternion.identity;
 
         movementInterpolation = new MovementInterpolation(range);
+
+        previousAngle = GetCurrentAngle();
     }
 	
 	void Update ()
@@ -72,10 +77,8 @@ public class Controlls : MonoBehaviour {
         {
             HandleArrowControlls();    
         }
-        else
-        {
-            HandleTouchControlls();
-        }
+
+        HandleControlls();
     }
 
     private void HandleArrowControlls()
@@ -84,7 +87,7 @@ public class Controlls : MonoBehaviour {
         {
             RotateLeftStart();
         }
-        else if (Input.GetKeyUp("left"))
+        if (Input.GetKeyUp("left"))
         {
             RotateLeftStop();
         }
@@ -92,13 +95,13 @@ public class Controlls : MonoBehaviour {
         {
             RotateRightStart();
         }
-        else if (Input.GetKeyUp("right"))
+        if (Input.GetKeyUp("right"))
         {
             RotateRightStop();
         }
     }
 
-    private void HandleTouchControlls()
+    private void HandleControlls()
     {
         if(activeDirections.left)
         {
