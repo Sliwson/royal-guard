@@ -104,11 +104,11 @@ public class Controlls : MonoBehaviour {
 
     private void HandleControlls()
     {
-        if(activeDirections.left)
+        if(activeDirections.left && !activeDirections.right)
         {
             RotateShield(Direction.Left);
         }
-        if(activeDirections.right)
+        if(activeDirections.right && !activeDirections.left)
         {
             RotateShield(Direction.Right);
         }
