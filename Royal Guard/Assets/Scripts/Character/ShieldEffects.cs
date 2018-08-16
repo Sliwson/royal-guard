@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
-public class ShieldParticles : MonoBehaviour {
+public class ShieldEffects : MonoBehaviour {
 
     [SerializeField]
     private Transform leftParticleTransform;
@@ -12,6 +13,8 @@ public class ShieldParticles : MonoBehaviour {
     private Range resetRange;
     [SerializeField]
     private float angleOffset = 1f;
+    [SerializeField]
+    private CameraShakeCreator cameraShakeParameters;
     [SerializeField]
     private GameObject particlePrefab;
 
@@ -37,15 +40,26 @@ public class ShieldParticles : MonoBehaviour {
         { 
             if (currentAngle < range.min + angleOffset)
             {
-                SpawnParticle(Direction.Left);
-                canSpawn = false;
+                ApplyEffects(Direction.Left);
             }
             else if (currentAngle > range.max - angleOffset)
             {
-                SpawnParticle(Direction.Right);
-                canSpawn = false;
+                ApplyEffects(Direction.Right);
             }
         }
+    }
+
+    private void ApplyEffects(Direction direction)
+    {
+        SpawnParticle(direction);
+        ShakeCamera();
+        canSpawn = false;
+    }
+
+    private void ShakeCamera()
+    {
+        CameraShakeInstance cameraShakeInstance = cameraShakeParameters.GetInstance();
+        CameraShaker.Instance.Shake(cameraShakeInstance);  
     }
 
     private void SpawnParticle(Direction direction)
