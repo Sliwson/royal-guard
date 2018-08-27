@@ -9,6 +9,9 @@ public class ProjectileManager : MonoBehaviour {
     [SerializeField]
     private ProjectileSequence projectileSequence;
 
+    [SerializeField]
+    private Vector2 projectileHitKnockback = Vector2.zero;
+
     private SequenceManager sequenceManager;
 
     private void Start()
@@ -20,6 +23,11 @@ public class ProjectileManager : MonoBehaviour {
     public void StartSequence()
     {
         sequenceManager.StartSequence(projectileSequence ,this);
+    }
+
+    public void KnockbackProjectile(Projectile projectile)
+    {
+        projectile.Push(projectileHitKnockback);
     }
 
     public void SpawnProjectile(ProjectileSpawner spawner)

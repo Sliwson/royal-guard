@@ -6,11 +6,13 @@ public class DamageController : MonoBehaviour
 {
     private Health health;
     private AnimationController animationController;
+    private ProjectileManager projectileManager;
 
     private void Start()
     {
         health = GetComponent<Health>();
         animationController = GetComponent<AnimationController>();
+        projectileManager = GameObject.FindGameObjectWithTag("ProjectileManager").GetComponent<ProjectileManager>();
     }
 
     private void DealDamage(int damage)
@@ -28,7 +30,7 @@ public class DamageController : MonoBehaviour
 
             animationController.TriggerAnimation(CharacterAnimations.Hit);
 
-            projectile.Push(new Vector2(10f,0f));
+            projectileManager.KnockbackProjectile(projectile);
 
             projectile.DisableCollider();
         }

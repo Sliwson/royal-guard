@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 183799100}
   m_Layer: 0
   m_Name: Projectile Manager
-  m_TagString: Untagged
+  m_TagString: ProjectileManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

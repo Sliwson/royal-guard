@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - CameraBorders
+  - ProjectileManager
   layers:
   - Default
   - TransparentFX
