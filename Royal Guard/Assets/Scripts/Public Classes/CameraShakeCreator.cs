@@ -8,13 +8,13 @@ using EZCameraShake;
 [System.Serializable]
 class CameraShakeCreator
 {
-    public float magnitude;
-    public float roughness;
-    public float fadeInTime;
-    public float fadeOutTime;
-    public Vector3 positionInfluence;
-    public Vector3 rotationInfluence;
-    public bool deleteOnInactive;
+    public float magnitude = 0f;
+    public float roughness = 0f;
+    public float fadeInTime = 0f;
+    public float fadeOutTime = 0f;
+    public Vector3 positionInfluence = Vector3.zero;
+    public Vector3 rotationInfluence = Vector3.zero;
+    public bool deleteOnInactive = true;
 
     public CameraShakeInstance GetInstance()
     {
