@@ -302,6 +302,7 @@ MonoBehaviour:
   projectilePartent: {fileID: 1504104545}
   projectileSequence: {fileID: 114616925120551430, guid: 5d69fe9a2106c9647a33603f2997c11d,
     type: 2}
+  projectileHitKnockback: {x: 10, y: 0}
 --- !u!4 &183799099
 Transform:
   m_ObjectHideFlags: 0
