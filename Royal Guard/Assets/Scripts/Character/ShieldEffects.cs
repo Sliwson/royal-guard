@@ -52,14 +52,10 @@ public class ShieldEffects : MonoBehaviour {
     private void ApplyEffects(Direction direction)
     {
         SpawnParticle(direction);
-        ShakeCamera();
-        canSpawn = false;
-    }
 
-    private void ShakeCamera()
-    {
-        CameraShakeInstance cameraShakeInstance = cameraShakeParameters.GetInstance();
-        CameraShaker.Instance.Shake(cameraShakeInstance);  
+        CameraShakeTrigger.ShakeCamera(cameraShakeParameters);
+
+        canSpawn = false;
     }
 
     private void SpawnParticle(Direction direction)
