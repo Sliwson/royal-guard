@@ -26,13 +26,7 @@ public class ShieldHit : MonoBehaviour {
 
             shieldAnimationController.TriggerAnimation(ShieldAnimations.Hit);
 
-            ShakeCamera();
+            CameraShakeTrigger.ShakeCamera(cameraShakeParameters);
         }
-    }
-
-    private void ShakeCamera()
-    {
-        CameraShakeInstance cameraShakeInstance = cameraShakeParameters.GetInstance();
-        CameraShaker.Instance.Shake(cameraShakeInstance);
     }
 }

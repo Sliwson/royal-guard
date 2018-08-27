@@ -6,7 +6,7 @@ using UnityEngine;
 using EZCameraShake;
 
 [System.Serializable]
-class CameraShakeCreator
+public class CameraShakeCreator
 {
     public float magnitude = 0f;
     public float roughness = 0f;
