@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class ShieldAnimationController : MonoBehaviour {
 
-	// Use this for initialization
+    private Animator animator;
+
 	void Start () {
-		
+        animator = GetComponent<Animator>();	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public void TriggerAnimation(ShieldAnimations shieldAnimation)
+    {
+        switch(shieldAnimation)
+        {
+            case ShieldAnimations.Hit:
+                animator.SetTrigger("hit");
+                break;
+
+        }
+    }
 }
