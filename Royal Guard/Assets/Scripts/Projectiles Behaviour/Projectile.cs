@@ -10,13 +10,21 @@ public class Projectile : MonoBehaviour {
     private int damage = 1;
     [SerializeField]
     private float destroyWhenHitShieldFactor = 0.7f;
+    [SerializeField]
+    private GameObject alertPrefab;
 
     private Collider2D collider2D;
     private Vector2 pushVelocity = Vector2.zero;
+    private Transform alertParent;
+    private Alert alertScript = null;
 
     private void Start()
     {
         collider2D = GetComponent<Collider2D>();
+
+        alertParent = GameObject.FindGameObjectWithTag("Alerts").transform;
+
+        SpawnAlert();
     }
 
     public void Push(Vector2 velocity)
@@ -31,6 +39,9 @@ public class Projectile : MonoBehaviour {
     public void DestroyProjectile()
     {
         Destroy(gameObject);
+
+        if (alertScript != null)
+            alertScript.DestroyAlert();
     }
 
     public void DisableCollider()
@@ -56,6 +67,9 @@ public class Projectile : MonoBehaviour {
     void Update () {
         if (transform.position.y < zDestroy)
             DestroyProjectile();
+
+        if (alertScript != null)
+            alertScript.UpdateAlert(transform);
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,5 +78,14 @@ public class Projectile : MonoBehaviour {
         {
             Physics2D.IgnoreCollision(collision.collider, collider2D);
         }
+    }
+
+    private void SpawnAlert()
+    {
+        GameObject prefab = Instantiate(alertPrefab, transform.position, Quaternion.identity, alertParent) as GameObject;
+
+        alertScript = prefab.GetComponent<Alert>();
+
+        alertScript.SpawnAlert(transform);
     }
 }

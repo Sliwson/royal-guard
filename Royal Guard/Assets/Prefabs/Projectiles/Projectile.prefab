@@ -102,6 +102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zDestroy: -100
   damage: 1
+  destroyWhenHitShieldFactor: 0.7
+  alertPrefab: {fileID: 1388384722990194, guid: f40089e330d75a347a5535342effece3,
+    type: 2}
 --- !u!114 &114865309986999712
 MonoBehaviour:
   m_ObjectHideFlags: 1
