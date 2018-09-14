@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coordinates : MonoBehaviour {
 
-    private Dictionary<Corner, Vector3> corners = new Dictionary<Corner, Vector3>();
+    private static Dictionary<Corner, Vector3> corners = new Dictionary<Corner, Vector3>();
 
     private void Start()
     {
@@ -12,7 +12,7 @@ public class Coordinates : MonoBehaviour {
         CalculateCorners();
     }
 
-    public Vector2 GetCameraCorner(Corner corner)
+    public static Vector2 GetCameraCorner(Corner corner)
     {
         if (corners.ContainsKey(corner))
             return corners[corner];
