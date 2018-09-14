@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileManager: {fileID: 183799098}
   sequenceManager: {fileID: 183799100}
-  loop: 0
+  loop: 1
 --- !u!4 &1050248612
 Transform:
   m_ObjectHideFlags: 0

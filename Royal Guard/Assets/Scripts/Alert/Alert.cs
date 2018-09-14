@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [System.Serializable]
 public class Alert : MonoBehaviour {
@@ -8,26 +9,38 @@ public class Alert : MonoBehaviour {
     [SerializeField]
     private float screenBorderOffset = 2f;
 
+    [SerializeField]
+    private ProjectilePositions[] ignoredPositions;
+
     private bool fadedOut = false;
 
+    private Dictionary<Corner, Vector3> cameraCorners;
     private AlertAnimationController alertAnimationController;
 
     public void SpawnAlert(Transform projectileTransform)
     {
+        cameraCorners = Coordinates.GetDictionary();
+
         ProjectilePositions position = CalculateProjectilePosition(projectileTransform);
         MoveAlert(projectileTransform, position);
 
         alertAnimationController = new AlertAnimationController(GetComponent<Animator>());
-        alertAnimationController.TriggerAnimation(AlertAnimations.FadeIn);
+        FadeIn();
     }
 
     public void UpdateAlert(Transform projectileTransform)
     {
         ProjectilePositions position = CalculateProjectilePosition(projectileTransform);
 
-        MoveAlert(projectileTransform, position);
+        if(!ArrayUtility.Contains<ProjectilePositions>(ignoredPositions, position))
+        {
+            MoveAlert(projectileTransform, position);
 
-        if (position == ProjectilePositions.OnCamera)
+            if (fadedOut && position != ProjectilePositions.OnCamera)
+                FadeIn();
+        }            
+
+        if (!fadedOut && position == ProjectilePositions.OnCamera)
             FadeOut();
     }
 
@@ -38,8 +51,8 @@ public class Alert : MonoBehaviour {
 
     private ProjectilePositions CalculateProjectilePosition(Transform projectileTransform)
     {
-        Vector3 leftTop = Coordinates.GetCameraCorner(Corner.LeftTop);
-        Vector3 rightBottom = Coordinates.GetCameraCorner(Corner.RightBottom);
+        Vector3 leftTop = cameraCorners[Corner.LeftTop];
+        Vector3 rightBottom = cameraCorners[Corner.RightBottom];
 
         Vector3 projectilePosition = projectileTransform.position;
 
@@ -74,17 +87,17 @@ public class Alert : MonoBehaviour {
 
     private void MoveAlert(Transform projectileTransform, ProjectilePositions position)
     {
-        RotateAlert(position);
+        RotateAlert(projectileTransform, position);
 
         PositionAlert(projectileTransform, position);
     }
 
-    private void RotateAlert(ProjectilePositions position)
+    private void RotateAlert(Transform projectileTransform, ProjectilePositions position)
     {
-        transform.rotation = CalculateRotation(position);
+        transform.rotation = CalculateRotation(projectileTransform, position);
     }
 
-    private Quaternion CalculateRotation(ProjectilePositions position)
+    private Quaternion CalculateRotation(Transform projectileTransform, ProjectilePositions position)
     {
         switch (position)
         {
@@ -96,9 +109,44 @@ public class Alert : MonoBehaviour {
                 return Quaternion.Euler(0f, 0f, 180f);
             case ProjectilePositions.Right:
                 return Quaternion.Euler(0f, 0f, 90f);
+            case ProjectilePositions.OnCamera:
+                return transform.rotation;
+            default:
+                return CalculateCornerRotation(projectileTransform, position);
+
+        }
+    }
+
+    private Quaternion CalculateCornerRotation(Transform projectileTransform, ProjectilePositions position)
+    {
+        Vector3 diffVector = ProjectilePositionToCameraCorner(position);
+
+        Vector3 diff = projectileTransform.position - diffVector;
+        diff.z = 0;
+
+        float angle = Vector3.Angle(diff, Vector3.up) - 180;
+
+        if (position == ProjectilePositions.RightUp || position == ProjectilePositions.RightDown)
+            angle *= -1;
+
+        return Quaternion.Euler(0f, 0f, angle);
+    }        
+
+    private Vector3 ProjectilePositionToCameraCorner(ProjectilePositions position)
+    {
+        switch (position)
+        {
+            case ProjectilePositions.LeftUp:
+                return cameraCorners[Corner.LeftTop];
+            case ProjectilePositions.LeftDown:
+                return cameraCorners[Corner.LeftBottom];
+            case ProjectilePositions.RightUp:
+                return cameraCorners[Corner.RightTop];
+            case ProjectilePositions.RightDown:
+                return cameraCorners[Corner.RightBottom];
         }
 
-        return transform.rotation;
+        return Vector3.zero;
     }
 
     private void PositionAlert(Transform projectileTransform, ProjectilePositions position)
@@ -108,8 +156,8 @@ public class Alert : MonoBehaviour {
 
     private Vector3 CalculateTransformPosition(Transform projectileTransform, ProjectilePositions position)
     {
-        Vector3 leftTop = Coordinates.GetCameraCorner(Corner.LeftTop);
-        Vector3 rightBottom = Coordinates.GetCameraCorner(Corner.RightBottom);
+        Vector3 leftTop = cameraCorners[Corner.LeftTop];
+        Vector3 rightBottom = cameraCorners[Corner.RightBottom];
 
         float y = CutYCorners(projectileTransform.position.y, leftTop, rightBottom);
         float x = CutXCorners(projectileTransform.position.x, leftTop, rightBottom);
@@ -149,6 +197,12 @@ public class Alert : MonoBehaviour {
             return rightBottom.x - screenBorderOffset;
         else
             return x;
+    }
+
+    private void FadeIn()
+    {
+        fadedOut = false;
+        alertAnimationController.TriggerAnimation(AlertAnimations.FadeIn);
     }
 
     private void FadeOut()

@@ -20,6 +20,11 @@ public class Coordinates : MonoBehaviour {
             return Vector3.zero;
     }
 
+    public static Dictionary<Corner, Vector3> GetDictionary()
+    {
+        return corners;
+    }
+
     private void InitializeDictionary()
     {
         corners.Add(Corner.LeftBottom, Vector3.zero);
