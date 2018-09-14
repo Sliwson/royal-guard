@@ -12,19 +12,23 @@ public class Alert : MonoBehaviour {
 
     private AlertAnimationController alertAnimationController;
 
-    public void SpawnAlert(Transform transform)
+    public void SpawnAlert(Transform projectileTransform)
     {
-        ProjectilePositions position = CalculateProjectilePosition(transform);
-
-
+        ProjectilePositions position = CalculateProjectilePosition(projectileTransform);
+        MoveAlert(projectileTransform, position);
 
         alertAnimationController = new AlertAnimationController(GetComponent<Animator>());
         alertAnimationController.TriggerAnimation(AlertAnimations.FadeIn);
     }
 
-    public void UpdateAlert(Transform position)
+    public void UpdateAlert(Transform projectileTransform)
     {
-        
+        ProjectilePositions position = CalculateProjectilePosition(projectileTransform);
+
+        MoveAlert(projectileTransform, position);
+
+        if (position == ProjectilePositions.OnCamera)
+            FadeOut();
     }
 
     public void DestroyAlert()
@@ -66,5 +70,90 @@ public class Alert : MonoBehaviour {
             else
                 return ProjectilePositions.OnCamera;
         }
+    }
+
+    private void MoveAlert(Transform projectileTransform, ProjectilePositions position)
+    {
+        RotateAlert(position);
+
+        PositionAlert(projectileTransform, position);
+    }
+
+    private void RotateAlert(ProjectilePositions position)
+    {
+        transform.rotation = CalculateRotation(position);
+    }
+
+    private Quaternion CalculateRotation(ProjectilePositions position)
+    {
+        switch (position)
+        {
+            case ProjectilePositions.Down:
+                return Quaternion.identity;
+            case ProjectilePositions.Left:
+                return Quaternion.Euler(0f, 0f, -90f);
+            case ProjectilePositions.Up:
+                return Quaternion.Euler(0f, 0f, 180f);
+            case ProjectilePositions.Right:
+                return Quaternion.Euler(0f, 0f, 90f);
+        }
+
+        return transform.rotation;
+    }
+
+    private void PositionAlert(Transform projectileTransform, ProjectilePositions position)
+    {
+        transform.position = CalculateTransformPosition(projectileTransform, position);
+    }
+
+    private Vector3 CalculateTransformPosition(Transform projectileTransform, ProjectilePositions position)
+    {
+        Vector3 leftTop = Coordinates.GetCameraCorner(Corner.LeftTop);
+        Vector3 rightBottom = Coordinates.GetCameraCorner(Corner.RightBottom);
+
+        float y = CutYCorners(projectileTransform.position.y, leftTop, rightBottom);
+        float x = CutXCorners(projectileTransform.position.x, leftTop, rightBottom);
+
+        switch (position)
+        {
+            case ProjectilePositions.Left:
+                return new Vector3(leftTop.x + screenBorderOffset, y);
+            case ProjectilePositions.Up:
+                return new Vector3(x, leftTop.y - screenBorderOffset);
+            case ProjectilePositions.Right:
+                return new Vector3(rightBottom.x - screenBorderOffset, y);
+            case ProjectilePositions.Down:
+                return new Vector3(x, rightBottom.y + screenBorderOffset);
+            case ProjectilePositions.OnCamera:
+                return transform.position;
+            default:
+                return new Vector3(x, y);
+        }
+    }
+
+    private float CutYCorners(float y, Vector3 leftTop, Vector3 rightBottom)
+    {
+        if (y > leftTop.y - screenBorderOffset)
+            return leftTop.y - screenBorderOffset;
+        else if (y < rightBottom.y + screenBorderOffset)
+            return rightBottom.y + screenBorderOffset;
+        else
+            return y;
+    }
+
+    private float CutXCorners(float x, Vector3 leftTop, Vector3 rightBottom)
+    {
+        if (x < leftTop.x + screenBorderOffset)
+            return leftTop.x + screenBorderOffset;
+        else if (x > rightBottom.x - screenBorderOffset)
+            return rightBottom.x - screenBorderOffset;
+        else
+            return x;
+    }
+
+    private void FadeOut()
+    {
+        fadedOut = true;
+        alertAnimationController.TriggerAnimation(AlertAnimations.FadeOut);
     }
 }

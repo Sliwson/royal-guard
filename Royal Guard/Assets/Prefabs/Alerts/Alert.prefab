@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4027424571082144}
   - component: {fileID: 212192254852654486}
   - component: {fileID: 95846359520630672}
-  - component: {fileID: 114769451795201496}
   - component: {fileID: 114850744503042608}
   m_Layer: 0
   m_Name: Alert
@@ -61,17 +60,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114769451795201496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388384722990194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ae34b5fca46b004aa448d52b56c3f38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114850744503042608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca483ec492eb43647a82a723679f0307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenBorderOffset: 2
+  screenBorderOffset: 7
 --- !u!212 &212192254852654486
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -120,7 +108,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: f5c8682621bb8c64c9d489bb2cf25eab, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
